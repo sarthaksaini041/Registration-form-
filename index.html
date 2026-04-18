@@ -19,7 +19,7 @@
             <!-- Brand Bar -->
             <div class="brand-bar">
                 <img src="portal_logo.svg" alt="Code Catalysts Logo" class="brand-bar-logo">
-                <div class="brand-bar-text">
+                <div class="brand-bar-text" id="admin-trigger" title="Admin Setup (Secret)">
                     <span class="brand-name">Code Catalysts</span>
                     <span class="brand-tag">Presents</span>
                 </div>
@@ -160,6 +160,21 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- Admin Settings Modal -->
+    <div id="admin-modal" class="modal-overlay hidden">
+        <div class="modal-card card">
+            <h2>Admin Setup 🛡️</h2>
+            <p>Paste your Apps Script Web App URL below to enable the backend on this browser.</p>
+            <div class="form-group">
+                <input type="text" id="admin-url" placeholder="https://script.google.com/...">
+            </div>
+            <div class="modal-actions">
+                <button id="save-admin" class="upi-button">Save & Enable</button>
+                <button id="close-admin" class="copy-btn" style="margin-top: 10px; opacity: 0.6;">Cancel</button>
+            </div>
+        </div>
     </div>
     
     <script src="script.js"></script>

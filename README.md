@@ -34,14 +34,16 @@ A high-fidelity, professional registration platform for the **Cyber Security Fun
    - `UPI_ID`, `CONTACT_NAME`, `CONTACT_PHONE`, etc.
 3. This `config.js` file is already listed in `.gitignore` and will never be pushed to GitHub.
 
-### 3. Deploy to GitHub Pages
+### 3. Setting Up the Live Site on GitHub Pages
 1. Push this code to a new GitHub Repository.
-2. Go to **Settings** > **Pages**.
-3. Select the `main` branch and the `/(root)` folder.
-4. Click **Save**. 
+2. Go to **Settings** > **Pages** and enable hosting for the `main` branch.
+3. Once live, open your website URL.
+4. **Secret Setup**: Click the **"Code Catalysts Presents"** logo text **3 times** quickly.
+5. A secret setup window will appear. Paste your **Web App URL** there and click **Save**.
+6. The portal will now be fully functional on your browser!
 
 > [!IMPORTANT]
-> Since `config.js` is not on GitHub, the live site on GitHub Pages will only show placeholders unless you use advanced methods like GitHub Actions. For most workshop organisers, keeping it local or using a public-safe URL is common.
+> The "Secret Setup" saves the URL only in your current browser. If you access the site from a different computer, you will need to repeat the triple-click setup once.
 
 ---
 
