@@ -1,0 +1,11 @@
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
+
+# Local configuration
+config.js
+.env
+*.local
