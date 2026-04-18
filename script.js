@@ -15,87 +15,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // DYNAMIC CONFIGURATION LOADER
     // ========================================================
     // ========================================================
-    // SECURE DYNAMIC CONFIGURATION LOADER
+    // CONFIGURATION LOADER
     // ========================================================
-    const getSavedUrl = () => localStorage.getItem('SAVED_GOOGLE_SCRIPT_URL');
-    
     const loadConfig = () => {
-        const savedUrl = getSavedUrl();
-        const hasConfigObject = typeof CONFIG !== 'undefined';
-
-        if (!hasConfigObject && !savedUrl) {
-            console.warn('Configuration Missing: Site is running in placeholder mode.');
+        if (typeof CONFIG === 'undefined') {
+            console.error('Configuration Missing: Please ensure config.js is present in the repository.');
+            globalError.style.display = 'block';
+            globalError.textContent = 'Configuration Error: Site is not properly configured. Please contact the administrator.';
             return false;
         }
 
-        // Populate UI with Config Values (Priority: config.js > LocalStorage)
-        const activeConfig = hasConfigObject ? CONFIG : {};
+        // Populate UI with Config Values
+        if (upiVal) upiVal.textContent = CONFIG.UPI_ID;
         
-        if (upiVal) upiVal.textContent = activeConfig.UPI_ID || '9027808174@ptaxis';
-        
-        const price = activeConfig.PRICE_INR || '149';
-        const contactName = activeConfig.CONTACT_NAME || 'Rudraksh Pandey';
-        const upiId = activeConfig.UPI_ID || '9027808174@ptaxis';
-
         const upiLink = document.getElementById('upi-link');
         if (upiLink) {
-            upiLink.textContent = `Pay ₹${price} via UPI`;
-            upiLink.href = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(contactName)}&am=${price}.00&cu=INR`;
+            upiLink.textContent = `Pay ₹${CONFIG.PRICE_INR} via UPI`;
+            upiLink.href = `upi://pay?pa=${CONFIG.UPI_ID}&pn=${encodeURIComponent(CONFIG.CONTACT_NAME)}&am=${CONFIG.PRICE_INR}.00&cu=INR`;
         }
 
         const contactNameEl = document.getElementById('contact-name');
-        if (contactNameEl) contactNameEl.textContent = contactName;
+        if (contactNameEl) contactNameEl.textContent = CONFIG.CONTACT_NAME;
 
         const contactPhoneEl = document.getElementById('contact-phone');
-        if (contactPhoneEl) contactPhoneEl.textContent = activeConfig.CONTACT_PHONE || '+91 9027808174';
+        if (contactPhoneEl) contactPhoneEl.textContent = CONFIG.CONTACT_PHONE;
 
         const whatsappLinkEl = document.getElementById('whatsapp-link');
-        if (whatsappLinkEl) whatsappLinkEl.href = activeConfig.WHATSAPP_LINK || '#';
+        if (whatsappLinkEl) whatsappLinkEl.href = CONFIG.WHATSAPP_LINK;
 
         return true;
     };
 
-    // Secret Admin Setup Logic
-    const adminTrigger = document.getElementById('admin-trigger');
-    const adminModal = document.getElementById('admin-modal');
-    const adminUrlInput = document.getElementById('admin-url');
-    const saveAdminBtn = document.getElementById('save-admin');
-    const closeAdminBtn = document.getElementById('close-admin');
-    let clickCount = 0;
-
-    if (adminTrigger) {
-        adminTrigger.addEventListener('click', () => {
-            clickCount++;
-            if (clickCount === 3) {
-                adminModal.classList.remove('hidden');
-                adminUrlInput.value = getSavedUrl() || '';
-                clickCount = 0;
-            }
-            setTimeout(() => { clickCount = 0; }, 2000);
-        });
-    }
-
-    if (closeAdminBtn) {
-        closeAdminBtn.addEventListener('click', () => adminModal.classList.add('hidden'));
-    }
-
-    if (saveAdminBtn) {
-        saveAdminBtn.addEventListener('click', () => {
-            const url = adminUrlInput.value.trim();
-            if (url) {
-                localStorage.setItem('SAVED_GOOGLE_SCRIPT_URL', url);
-                alert('Success! Configuration saved to this browser.');
-                location.reload();
-            } else {
-                localStorage.removeItem('SAVED_GOOGLE_SCRIPT_URL');
-                alert('Configuration cleared.');
-                location.reload();
-            }
-        });
-    }
-
     const isConfigLoaded = loadConfig();
-    const GOOGLE_SCRIPT_URL = (typeof CONFIG !== 'undefined' ? CONFIG.GOOGLE_SCRIPT_URL : '') || getSavedUrl() || '';
+    const GOOGLE_SCRIPT_URL = typeof CONFIG !== 'undefined' ? CONFIG.GOOGLE_SCRIPT_URL : '';
 
     // File Upload Handler for Visual Feedback
     fileInput.addEventListener('change', (e) => {

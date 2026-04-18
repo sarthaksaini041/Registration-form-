@@ -17,44 +17,26 @@ A high-fidelity, professional registration platform for the **Cyber Security Fun
 
 ## 🛠️ Setup Instructions
 
-### 1. Backend Setup (Google Apps Script)
-1. Create a new **Google Sheet**.
-2. Format columns as: `Timestamp | Name | Email | Phone | University | Year | Course | Transaction ID | Image URL`.
-3. Go to `Extensions` > `Apps Script`.
-4. Copy the content of `google_apps_script.js` from this project and paste it into the script editor.
-5. Click **Deploy** > **New Deployment**.
-6. Select **Web App**.
-7. Set **Execute as** to `Me` and **Who has access** to `Anyone`.
-8. Copy the **Web App URL** provided after deployment.
-
-### 2. Frontend Configuration (Secure Setup)
-1. In the project root, duplicate `config.example.js` and rename it to **`config.js`**.
-2. Open `config.js` and fill in your private details:
-   - `GOOGLE_SCRIPT_URL`: Paste your Web App URL here.
+### 2. Frontend Configuration
+1. In the project root, open **`config.js`**.
+2. Fill in your private details:
+   - `GOOGLE_SCRIPT_URL`: Paste your App Script URL here.
    - `UPI_ID`, `CONTACT_NAME`, `CONTACT_PHONE`, etc.
-3. This `config.js` file is already listed in `.gitignore` and will never be pushed to GitHub.
+3. Save the file.
 
-### 3. Setting Up the Live Site on GitHub Pages
+### 3. Deploy to GitHub Pages
 1. Push this code to a new GitHub Repository.
 2. Go to **Settings** > **Pages** and enable hosting for the `main` branch.
-3. Once live, open your website URL.
-4. **Secret Setup**: Click the **"Code Catalysts Presents"** logo text **3 times** quickly.
-5. A secret setup window will appear. Paste your **Web App URL** there and click **Save**.
-6. The portal will now be fully functional on your browser!
-
-> [!IMPORTANT]
-> The "Secret Setup" saves the URL only in your current browser. If you access the site from a different computer, you will need to repeat the triple-click setup once.
+3. Your site will be live and functional for everyone!
 
 ---
 
 ## 📂 Project Structure
 - `index.html`: Core landing page and technical form structure.
 - `style.css`: Premium dark-mode styling with glassmorphism.
-- `script.js`: Form handling, UPI copy logic, and API integration.
-- `google_apps_script.js`: Backend logic for Google Drive/Sheets.
-- `portal_logo.svg`: Portal branding logo.
-- `payment_qr.png`: UPI Payment QR code.
-- `hero_illustration.png`: Banner illustration for the workshop.
+- `script.js`: Form handling, and API integration.
+- `config.js`: Configuration file (MUST be pushed to GitHub to work).
+- `google_apps_script.js`: Backend logic for your spreadsheet.
 
 ---
 
