@@ -16,9 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================================================
     const loadConfig = () => {
         if (typeof CONFIG === 'undefined') {
-            console.error('Configuration Missing: Please create config.js from config.example.js');
-            globalError.style.display = 'block';
-            globalError.textContent = 'Configuration Error: config.js is missing. Please follow the setup instructions.';
+            console.warn('Configuration Missing: Site is running in placeholder mode.');
             return false;
         }
 
@@ -118,6 +116,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Halt if any field is invalid
         if (!(isNameValid && isEmailValid && isPhoneValid && isUniValid && isYearValid && isCourseValid && isTxValid && isFileValid)) {
+            return;
+        }
+
+        if (!isConfigLoaded) {
+            globalError.style.display = 'block';
+            globalError.textContent = 'Configuration Missing: This site is live on GitHub but has not been configured with a backend. Please set up config.js as per the README.';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            submitBtn.disabled = false;
+            btnText.style.display = 'block';
+            spinner.style.display = 'none';
             return;
         }
 
